@@ -1,0 +1,153 @@
+{
+  "nav": {
+    "brand": "AquaSat TJ",
+    "tagline": "Water Intelligence · Tajikistan",
+    "tabs": { "map": "Map", "analytics": "Analytics", "education": "Learn" },
+    "status": { "live": "LIVE", "dataSource": "WHO · UNICEF · World Bank · NASA" }
+  },
+  "layers": {
+    "title": "Map Layers",
+    "rivers": "Rivers & Streams",
+    "glaciers": "Glaciers",
+    "waterAccess": "Clean Water Access",
+    "climateRisks": "Climate Risk Zones",
+    "hydropower": "Hydropower Infrastructure",
+    "reservoirs": "Reservoirs",
+    "populationDensity": "Population Density",
+    "agriculturalZones": "Agricultural Zones"
+  },
+  "legend": {
+    "title": "Legend",
+    "highAccess": "High water access (>80%)",
+    "moderateAccess": "Moderate access (60–80%)",
+    "lowAccess": "Low access / Risk zone (<60%)",
+    "rivers": "Rivers",
+    "glaciers": "Glaciers",
+    "hydropower": "Hydropower plant",
+    "reservoir": "Reservoir"
+  },
+  "regions": {
+    "dushanbe": {
+      "name": "Dushanbe", "type": "Capital City",
+      "description": "Capital and primary urban center. Municipal water infrastructure covers 94% of residents. Central hub for national water policy and management.",
+      "stats": { "waterAccess": 94, "population": "860,000", "floodRisk": "Low", "glaciers": "None", "drinkingWaterQuality": "Good", "sanitationCoverage": 91, "annualRainfall": "680mm", "infrastructureScore": 8.2 }
+    },
+    "sughd": {
+      "name": "Sughd", "type": "Northern Region",
+      "description": "Home to Khujand city and the Kayrakkum Reservoir. Agriculture-intensive region relying on Syr Darya and Zeravshan rivers. Significant irrigation infrastructure.",
+      "stats": { "waterAccess": 81, "population": "2,850,000", "floodRisk": "Moderate", "glaciers": "1,200 km²", "drinkingWaterQuality": "Moderate", "sanitationCoverage": 74, "annualRainfall": "420mm", "infrastructureScore": 6.7 }
+    },
+    "gbao": {
+      "name": "GBAO", "type": "Gorno-Badakhshan AO",
+      "description": "Covers 45% of Tajikistan's territory with only 3% of population. Houses Fedchenko Glacier — the longest non-polar glacier on Earth. Extreme terrain severely limits infrastructure.",
+      "stats": { "waterAccess": 45, "population": "220,000", "floodRisk": "High (GLOFs)", "glaciers": "6,100 km²", "drinkingWaterQuality": "Variable", "sanitationCoverage": 38, "annualRainfall": "180mm", "infrastructureScore": 3.1 }
+    },
+    "khatlon": {
+      "name": "Khatlon", "type": "Southern Region",
+      "description": "Most populous and agriculturally intensive region. Highest flood and drought risk due to Panj/Vakhsh river dynamics. Key food production zone facing climate stress.",
+      "stats": { "waterAccess": 63, "population": "3,150,000", "floodRisk": "High", "glaciers": "120 km²", "drinkingWaterQuality": "Poor-Moderate", "sanitationCoverage": 52, "annualRainfall": "310mm", "infrastructureScore": 4.8 }
+    },
+    "drs": {
+      "name": "Districts of Rep. Subordination", "type": "Central Districts",
+      "description": "Districts surrounding Dushanbe. Mixed urban-rural water access. Site of Nurek and Rogun hydropower facilities. Vakhsh River corridor is strategically critical.",
+      "stats": { "waterAccess": 70, "population": "1,800,000", "floodRisk": "Moderate", "glaciers": "610 km²", "drinkingWaterQuality": "Moderate", "sanitationCoverage": 64, "annualRainfall": "540mm", "infrastructureScore": 6.1 }
+    }
+  },
+  "analytics": {
+    "title": "Environmental Analytics",
+    "subtitle": "Water, ice, climate and energy across Tajikistan",
+    "waterAccess": { "title": "Clean Water Access", "subtitle": "National average, 2017–2023", "unit": "%", "source": "WHO/UNICEF JMP 2023" },
+    "glacierCoverage": { "title": "Glacier Coverage", "subtitle": "Total area, annual", "unit": "km²", "source": "NASA GLIMS, 2023" },
+    "floodRiskZones": { "title": "High-Risk Flood Zones", "subtitle": "Districts at elevated risk", "unit": "districts", "source": "World Bank GFDRR 2023" },
+    "hydroCapacity": { "title": "Hydropower Capacity", "subtitle": "Installed + under construction", "unit": "GW", "source": "IHA, Ministry of Energy TJ 2023" },
+    "regionalComparison": "Regional Water Access Comparison",
+    "climateDischarge": "Annual River Discharge & Temperature Anomaly",
+    "glacierTimeline": "Glacier Mass Loss Timeline",
+    "precipitationTrend": "Precipitation Anomaly vs 1990 Baseline",
+    "waterQuality": "Regional Water Quality Profile",
+    "hydroPlants": "Hydropower Plants",
+    "vsLastYear": "vs prior year"
+  },
+  "education": {
+    "title": "Environmental Intelligence",
+    "subtitle": "Understanding Tajikistan's water systems",
+    "askAI": "Ask AquaAI about this",
+    "cards": {
+      "glaciers": {
+        "title": "Glaciers — Tajikistan's Water Towers",
+        "body": "Tajikistan holds over 60% of Central Asia's glacier reserves, covering more than 8,000 km² across the Pamir and Alai ranges. The Fedchenko Glacier at 77km is the longest non-polar glacier on Earth — feeding the Muksu and Vakhsh rivers that power Tajikistan's economy.",
+        "stats": ["8,030 km² total glacier area", "60% of CA freshwater reserves", "Fedchenko: 77km long, up to 1km deep"],
+        "warning": "Climate models project 30–40% glacier mass reduction by 2050 under current emissions trajectories."
+      },
+      "waterAccess": {
+        "title": "Clean Water Access — The Equity Challenge",
+        "body": "While Tajikistan is water-rich in natural resources, equitable access remains critical. Urban Dushanbe achieves 94% access while rural GBAO communities average below 45% — a divide driven by geography, infrastructure gaps, and investment disparities.",
+        "stats": ["74% national average (WHO 2023)", "94% urban vs 45% remote rural", "2.5M+ people lack safe water"],
+        "warning": "Without accelerated infrastructure investment, the rural-urban water gap will widen by 2030."
+      },
+      "hydropower": {
+        "title": "Hydropower — Strength and Strategic Tension",
+        "body": "Tajikistan generates ~98% of its electricity from hydropower, making it one of Earth's most hydro-dependent nations. Nurek Dam (300m, 3GW) was the world's tallest. Rogun Dam (335m, 3.6GW target) is under construction and will generate enough to transform the national economy.",
+        "stats": ["98% electricity from hydropower", "Nurek: 300m, 3,000 MW", "Rogun: 335m target, 3,600 MW"],
+        "warning": "Regional water conflicts with Uzbekistan and Kazakhstan over Amu Darya flows remain unresolved."
+      },
+      "climateChange": {
+        "title": "Climate Change — Accelerating at 2× Global Rate",
+        "body": "Tajikistan is warming at 0.2°C per decade — roughly twice the global average. This accelerates glacial melt, alters seasonal river timing, increases GLOF (Glacial Lake Outburst Flood) frequency, and creates paradoxical water scarcity: more winter floods, drier summers.",
+        "stats": ["+0.2°C per decade (vs 0.1°C global avg)", "18 high-risk flood districts identified", "↑ 340% increase in GLOF events since 1990"],
+        "warning": "Khatlon's irrigation deficit is projected to reach 40% by 2040 without climate adaptation measures."
+      },
+      "rivers": {
+        "title": "River Systems — Arteries of Life",
+        "body": "The Vakhsh and Panj rivers (forming the Amu Darya) are the backbone of Tajikistan's water system. The Zeravshan feeds Sughd's agriculture. The Syr Darya drains the north. Together they carry roughly 64 km³ annually — though this is declining due to glacier retreat and evaporation increase.",
+        "stats": ["~64 km³ annual discharge", "Vakhsh: 786km, primary power source", "Amu Darya: feeds 40M people downstream"],
+        "warning": "Annual river discharge has decreased ~11% since 1990 — a trend accelerating with climate change."
+      }
+    }
+  },
+  "ai": {
+    "title": "AquaAI Assistant",
+    "modelLabel": "Powered by Lovable AI",
+    "placeholder": "Ask about water, glaciers, climate risks...",
+    "send": "Send",
+    "welcome": "Welcome to AquaSat TJ. I can explain water access issues, glacier dynamics, climate risks, and regional environmental data across Tajikistan. Click any region on the map or ask me anything.",
+    "suggestedPrompts": [
+      "Why are Tajikistan's glaciers retreating?",
+      "Explain the Nurek and Rogun dams",
+      "What's causing water scarcity in GBAO?",
+      "What are the main flood risks in Khatlon?",
+      "How does glacier melt affect downstream countries?"
+    ],
+    "errorFallback": "AquaAI is temporarily offline. Please try again in a moment.",
+    "rateLimit": "Too many requests. Please wait a moment.",
+    "credits": "AI credits exhausted. Add credits in workspace settings."
+  },
+  "statusBar": {
+    "waterAccess": "Clean Water Access",
+    "glacierArea": "Glacier Area",
+    "riskDistricts": "Risk Districts",
+    "hydroCapacity": "Hydro Capacity",
+    "population": "Population"
+  },
+  "regionDetail": {
+    "waterAccess": "Water Access",
+    "population": "Population",
+    "floodRisk": "Flood Risk",
+    "glaciers": "Glaciers",
+    "sanitation": "Sanitation",
+    "rainfall": "Rainfall",
+    "infrastructure": "Infrastructure score",
+    "askAI": "Ask AquaAI about this region",
+    "selectPrompt": "Click any region on the map to view detailed environmental data."
+  },
+  "mapControls": {
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "resetView": "Reset view",
+    "satellite": "Satellite",
+    "terrain": "Terrain",
+    "dark": "Dark",
+    "missingToken": "Add VITE_MAPBOX_TOKEN as a build secret to enable the interactive map.",
+    "missingTokenHint": "Workspace Settings → Build Secrets → VITE_MAPBOX_TOKEN"
+  }
+}
