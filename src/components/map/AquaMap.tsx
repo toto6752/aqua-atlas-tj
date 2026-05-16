@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import Map, { Layer, Marker, NavigationControl, Source, type MapRef, type MapMouseEvent } from "react-map-gl/mapbox";
+import Map, { Layer, Marker, NavigationControl, Source, type MapRef, type MapMouseEvent } from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 import {
@@ -8,14 +9,56 @@ import {
 } from "@/data/tajikistanGeoJSON";
 import { HYDROPOWER_PLANTS, RESERVOIRS, REGION_CENTROIDS, REGION_POP, type RegionId } from "@/data/environmentalData";
 import { MapLegend } from "./MapLegend";
-import { Zap, AlertTriangle, MapPin } from "lucide-react";
+import { Zap, AlertTriangle } from "lucide-react";
 
-const TOKEN = import.meta.env.VITE_MAPBOX_TOKEN as string | undefined;
-
-const STYLE_URLS: Record<string, string> = {
-  dark: "mapbox://styles/mapbox/dark-v11",
-  satellite: "mapbox://styles/mapbox/satellite-streets-v12",
-  terrain: "mapbox://styles/mapbox/outdoors-v12",
+// Free, token-less raster tile styles using OpenStreetMap & Esri.
+const STYLE_URLS: Record<string, any> = {
+  dark: {
+    version: 8,
+    sources: {
+      "carto-dark": {
+        type: "raster",
+        tiles: [
+          "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+          "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+        attribution: "© OpenStreetMap contributors © CARTO",
+      },
+    },
+    layers: [{ id: "carto-dark", type: "raster", source: "carto-dark" }],
+  },
+  satellite: {
+    version: 8,
+    sources: {
+      esri: {
+        type: "raster",
+        tiles: [
+          "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        ],
+        tileSize: 256,
+        attribution: "Tiles © Esri",
+      },
+    },
+    layers: [{ id: "esri", type: "raster", source: "esri" }],
+  },
+  terrain: {
+    version: 8,
+    sources: {
+      osm: {
+        type: "raster",
+        tiles: [
+          "https://a.tile.opentopomap.org/{z}/{x}/{y}.png",
+          "https://b.tile.opentopomap.org/{z}/{x}/{y}.png",
+          "https://c.tile.opentopomap.org/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+        attribution: "© OpenTopoMap (CC-BY-SA)",
+      },
+    },
+    layers: [{ id: "osm", type: "raster", source: "osm" }],
+  },
 };
 
 export function AquaMap() {
@@ -50,23 +93,10 @@ export function AquaMap() {
 
   const interactiveLayers = useMemo(() => ["region-fill"], []);
 
-  if (!TOKEN) {
-    return (
-      <div className="h-full flex items-center justify-center p-8">
-        <div className="panel max-w-md p-6 text-center">
-          <MapPin className="mx-auto mb-3 text-cyan-400" size={32} />
-          <h3 className="font-semibold text-text-primary mb-1">{t("mapControls.missingToken")}</h3>
-          <p className="text-xs text-text-secondary font-mono">{t("mapControls.missingTokenHint")}</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="relative h-full w-full">
       <Map
         ref={ref}
-        mapboxAccessToken={TOKEN}
         initialViewState={{ longitude: 70.8, latitude: 38.8, zoom: 6.2 }}
         minZoom={5}
         maxZoom={12}
