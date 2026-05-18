@@ -28,33 +28,35 @@ function Index() {
   }, [language, i18n]);
 
   return (
-    <div className="h-screen flex flex-col bg-navy-950 text-text-primary overflow-hidden">
-      <Navbar />
-      <main className="flex-1 flex overflow-hidden">
-        <AnimatePresence mode="wait">
-          {activeView === "map" && (
-            <motion.div key="map" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }} className="flex-1 flex overflow-hidden">
-              <LeftPanel />
-              <div className="flex-1 relative"><AquaMap /></div>
-              <AIAssistant />
-            </motion.div>
-          )}
-          {activeView === "analytics" && (
-            <motion.div key="an" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }} className="flex-1 overflow-hidden">
-              <Suspense fallback={<Loader />}><AnalyticsView /></Suspense>
-            </motion.div>
-          )}
-          {activeView === "education" && (
-            <motion.div key="ed" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }} className="flex-1 overflow-hidden">
-              <Suspense fallback={<Loader />}><EducationView /></Suspense>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
-      <StatusBar />
+    <div className="app-shell h-screen flex flex-col bg-navy-950 text-text-primary overflow-hidden relative">
+      <div className="relative z-10 flex flex-col h-full">
+        <Navbar />
+        <main className="flex-1 flex overflow-hidden">
+          <AnimatePresence mode="wait">
+            {activeView === "map" && (
+              <motion.div key="map" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }} className="flex-1 flex overflow-hidden">
+                <LeftPanel />
+                <div className="flex-1 relative"><AquaMap /></div>
+                <AIAssistant />
+              </motion.div>
+            )}
+            {activeView === "analytics" && (
+              <motion.div key="an" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }} className="flex-1 overflow-hidden">
+                <Suspense fallback={<Loader />}><AnalyticsView /></Suspense>
+              </motion.div>
+            )}
+            {activeView === "education" && (
+              <motion.div key="ed" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }} className="flex-1 overflow-hidden">
+                <Suspense fallback={<Loader />}><EducationView /></Suspense>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>
+        <StatusBar />
+      </div>
     </div>
   );
 }

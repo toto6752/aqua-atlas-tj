@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { Send, Sparkles, AlertCircle } from "lucide-react";
+import { PaperPlaneTilt, Sparkle, WarningCircle, CircleNotch } from "@phosphor-icons/react";
 import { useAppStore } from "@/store/useAppStore";
 
 export function AIAssistant() {
@@ -24,7 +24,6 @@ export function AIAssistant() {
     },
   });
 
-  // sync external trigger messages from store (e.g., region/edu cards)
   useEffect(() => {
     const last = chatMessages[chatMessages.length - 1];
     if (last && last.role === "user" && status === "ready") {
@@ -51,28 +50,41 @@ export function AIAssistant() {
   const prompts = t("ai.suggestedPrompts", { returnObjects: true }) as string[];
 
   return (
-    <aside className="w-[300px] shrink-0 border-l border-border-subtle flex flex-col bg-navy-900/60">
-      <div className="p-3 border-b border-border-subtle flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-cyan-400/15 border border-cyan-400/30 flex items-center justify-center">
-            <Sparkles size={13} className="text-cyan-400" />
+    <aside className="w-[320px] shrink-0 border-l border-border-subtle flex flex-col bg-navy-900/40 backdrop-blur-xl">
+      <div className="p-4 border-b border-border-subtle flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div className="relative w-9 h-9 rounded-xl flex items-center justify-center"
+            style={{ background: "linear-gradient(135deg, rgba(108,198,224,0.18), rgba(109,208,180,0.10))",
+                     border: "1px solid rgba(108,198,224,0.30)",
+                     boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}>
+            <Sparkle size={15} weight="duotone" className="text-cyan-400" />
           </div>
           <div>
-            <div className="text-[13px] font-semibold text-text-primary leading-tight">{t("ai.title")}</div>
-            <div className="text-[10px] font-mono text-text-muted">{t("ai.modelLabel")}</div>
+            <div className="text-[13px] font-semibold text-text-primary leading-tight tracking-tight">{t("ai.title")}</div>
+            <div className="text-[10.5px] text-text-muted mt-0.5">{t("ai.modelLabel")}</div>
           </div>
+        </div>
+        <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-panel-mid/50 border border-border-subtle/70">
+          <span className="w-1.5 h-1.5 rounded-full bg-success-green animate-pulse-dot" />
+          <span className="text-[9px] font-mono text-text-secondary tracking-wider">READY</span>
         </div>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto scroll-thin p-3 space-y-3">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto scroll-thin p-4 space-y-3">
         {isEmpty && (
           <div className="space-y-3">
-            <div className="text-xs text-text-secondary leading-relaxed p-3 panel">{t("ai.welcome")}</div>
+            <div className="text-[12.5px] text-text-secondary leading-relaxed p-3.5 panel-flat">
+              {t("ai.welcome")}
+            </div>
+            <div className="text-[10px] font-mono tracking-wider text-text-muted px-1">SUGGESTED</div>
             <div className="space-y-1.5">
               {prompts.map((p) => (
                 <button key={p} onClick={() => { setInput(""); void sendMessage({ text: p }); }}
-                  className="w-full text-left text-[11px] text-text-secondary hover:text-cyan-400 px-2.5 py-1.5 rounded-md border border-border-subtle hover:border-cyan-400/40 transition-colors">
-                  {p}
+                  className="group w-full text-left text-[12px] text-text-secondary hover:text-text-primary px-3 py-2.5 rounded-xl bg-panel-mid/30 hover:bg-panel-mid/60 border border-border-subtle/50 hover:border-cyan-400/30 transition-all">
+                  <div className="flex items-start gap-2">
+                    <Sparkle size={11} weight="duotone" className="text-cyan-400/70 mt-1 shrink-0 group-hover:text-cyan-400 transition-colors" />
+                    <span className="leading-snug">{p}</span>
+                  </div>
                 </button>
               ))}
             </div>
@@ -81,19 +93,22 @@ export function AIAssistant() {
 
         <AnimatePresence initial={false}>
           {messages.map((m) => {
-            const text = m.parts
-              .map((part) => (part.type === "text" ? part.text : ""))
-              .join("");
+            const text = m.parts.map((part) => (part.type === "text" ? part.text : "")).join("");
             const isUser = m.role === "user";
             return (
               <motion.div key={m.id}
-                initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 360, damping: 28 }}
                 className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-                <div className={`max-w-[85%] text-xs leading-relaxed whitespace-pre-wrap rounded-lg px-3 py-2 ${
-                  isUser ? "bg-cyan-400/15 border border-cyan-400/30 text-text-primary"
-                         : "bg-panel-mid border border-border-subtle text-text-primary"
-                }`}>
+                <div className={`max-w-[88%] text-[12.5px] leading-relaxed whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 ${
+                  isUser
+                    ? "text-text-primary rounded-br-md"
+                    : "bg-panel-mid/60 border border-border-subtle/60 text-text-primary rounded-bl-md"
+                }`}
+                style={isUser ? {
+                  background: "linear-gradient(180deg, rgba(108,198,224,0.16), rgba(108,198,224,0.08))",
+                  border: "1px solid rgba(108,198,224,0.28)",
+                } : undefined}>
                   {text}
                 </div>
               </motion.div>
@@ -103,34 +118,35 @@ export function AIAssistant() {
 
         {status === "submitted" && (
           <div className="flex justify-start">
-            <div className="bg-panel-mid border border-border-subtle rounded-lg px-3 py-2 flex gap-1">
-              {[0, 1, 2].map((i) => (
-                <motion.span key={i} className="w-1.5 h-1.5 rounded-full bg-cyan-400"
-                  animate={{ opacity: [0.3, 1, 0.3] }}
-                  transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.15 }} />
-              ))}
+            <div className="bg-panel-mid/60 border border-border-subtle/60 rounded-2xl rounded-bl-md px-3.5 py-2.5 flex items-center gap-2">
+              <CircleNotch size={12} weight="bold" className="text-cyan-400 animate-spin" />
+              <span className="text-[11px] text-text-muted">Thinking…</span>
             </div>
           </div>
         )}
 
         {error && (
-          <div className="flex items-start gap-2 p-2.5 rounded-lg bg-risk-red/10 border border-risk-red/30 text-xs text-risk-red">
-            <AlertCircle size={13} className="mt-0.5 shrink-0" /> {error}
+          <div className="flex items-start gap-2 p-3 rounded-xl bg-risk-red/8 border border-risk-red/25 text-[12px] text-risk-red">
+            <WarningCircle size={14} weight="duotone" className="mt-0.5 shrink-0" /> {error}
           </div>
         )}
       </div>
 
       <form onSubmit={onSubmit} className="p-3 border-t border-border-subtle">
-        <div className="flex items-end gap-2 panel !p-1.5 focus-within:border-cyan-400/40">
+        <div className="flex items-end gap-2 rounded-2xl p-1.5 bg-panel-mid/40 border border-border-subtle focus-within:border-cyan-400/40 focus-within:bg-panel-mid/60 transition-colors">
           <textarea
             value={input} onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); onSubmit(); } }}
             placeholder={t("ai.placeholder")} rows={1}
-            className="flex-1 bg-transparent resize-none outline-none text-xs text-text-primary placeholder:text-text-muted px-2 py-1.5 max-h-24"
+            className="flex-1 bg-transparent resize-none outline-none text-[12.5px] text-text-primary placeholder:text-text-muted px-2.5 py-1.5 max-h-28"
           />
           <button type="submit" disabled={!input.trim() || isLoading}
-            className="shrink-0 w-8 h-8 rounded-md bg-cyan-400/15 border border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/25 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors">
-            <Send size={13} />
+            className="shrink-0 w-9 h-9 rounded-xl text-cyan-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all"
+            style={{ background: input.trim() && !isLoading
+              ? "linear-gradient(135deg, rgba(108,198,224,0.28), rgba(109,208,180,0.20))"
+              : "rgba(24,41,66,0.6)",
+              border: "1px solid rgba(108,198,224,0.30)" }}>
+            <PaperPlaneTilt size={14} weight="fill" />
           </button>
         </div>
       </form>

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { BarChart, Bar, ResponsiveContainer, XAxis, Cell } from "recharts";
-import { Sparkles, Droplet, Users, AlertTriangle, Mountain } from "lucide-react";
+import { Sparkle, Drop, UsersThree, WarningCircle, Mountains } from "@phosphor-icons/react";
 import { useAppStore } from "@/store/useAppStore";
 import { TIME_SERIES, REGION_COLORS, type RegionId } from "@/data/environmentalData";
 import { slideInRight } from "@/lib/animations";
@@ -32,53 +32,54 @@ export function RegionDetailPanel({ regionId }: { regionId: string }) {
   };
 
   const stats = [
-    { icon: Droplet, label: t("regionDetail.waterAccess"), value: `${region.stats.waterAccess}%`, color: "text-cyan-400" },
-    { icon: Users, label: t("regionDetail.population"), value: region.stats.population, color: "text-text-primary" },
-    { icon: AlertTriangle, label: t("regionDetail.floodRisk"), value: region.stats.floodRisk, color: "text-amber-400" },
-    { icon: Mountain, label: t("regionDetail.glaciers"), value: region.stats.glaciers, color: "text-text-primary" },
+    { icon: Drop, label: t("regionDetail.waterAccess"), value: `${region.stats.waterAccess}%`, tone: "text-cyan-400" },
+    { icon: UsersThree, label: t("regionDetail.population"), value: region.stats.population, tone: "text-text-primary" },
+    { icon: WarningCircle, label: t("regionDetail.floodRisk"), value: region.stats.floodRisk, tone: "text-amber-400" },
+    { icon: Mountains, label: t("regionDetail.glaciers"), value: region.stats.glaciers, tone: "text-text-primary" },
   ];
 
   return (
-    <motion.div variants={slideInRight} initial="initial" animate="animate" className="p-4 space-y-4">
+    <motion.div variants={slideInRight} initial="initial" animate="animate" className="p-5 space-y-5">
       <div>
-        <div className="text-[10px] uppercase tracking-wider font-mono text-cyan-400">{region.type}</div>
-        <h2 className="text-lg font-semibold text-text-primary leading-tight">{region.name}</h2>
+        <div className="text-[10px] uppercase tracking-[0.14em] font-mono text-cyan-400/90">{region.type}</div>
+        <h2 className="text-[18px] font-semibold text-text-primary leading-tight mt-0.5 tracking-tight">{region.name}</h2>
       </div>
 
       <div className="grid grid-cols-2 gap-2">
         {stats.map((s) => (
-          <div key={s.label} className="panel !p-2.5">
-            <div className="flex items-center gap-1.5 text-[10px] uppercase font-mono tracking-wider text-text-muted">
-              <s.icon size={10} /> {s.label}
+          <div key={s.label} className="panel-flat p-3">
+            <div className="flex items-center gap-1.5 text-[10px] tracking-wide text-text-muted">
+              <s.icon size={11} weight="duotone" /> {s.label}
             </div>
-            <div className={`mt-0.5 data-num text-sm font-medium ${s.color}`}>{s.value}</div>
+            <div className={`mt-1 data-num text-[15px] font-medium ${s.tone}`}>{s.value}</div>
           </div>
         ))}
       </div>
 
       <div>
-        <div className="flex justify-between text-[10px] font-mono uppercase tracking-wider text-text-muted mb-1.5">
+        <div className="flex justify-between text-[10px] font-mono tracking-wider text-text-muted mb-2">
           <span>{t("regionDetail.infrastructure")}</span>
-          <span className="data-num text-cyan-400">{region.stats.infrastructureScore}/10</span>
+          <span className="data-num text-text-secondary">{region.stats.infrastructureScore}/10</span>
         </div>
-        <div className="h-1.5 bg-panel-mid rounded-full overflow-hidden">
+        <div className="h-1 bg-panel-mid/60 rounded-full overflow-hidden">
           <motion.div initial={{ width: 0 }} animate={{ width: `${region.stats.infrastructureScore * 10}%` }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="h-full bg-gradient-to-r from-cyan-400 to-teal-400" />
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="h-full rounded-full"
+            style={{ background: "linear-gradient(90deg, #6cc6e0, #6dd0b4)" }} />
         </div>
       </div>
 
-      <p className="text-xs text-text-secondary leading-relaxed">{region.description}</p>
+      <p className="text-[12.5px] text-text-secondary leading-relaxed">{region.description}</p>
 
       <div>
-        <div className="text-[10px] font-mono uppercase tracking-wider text-text-muted mb-1.5">Water access by region</div>
+        <div className="text-[10px] font-mono tracking-wider text-text-muted mb-2">Water access by region</div>
         <div className="h-20">
           <ResponsiveContainer>
             <BarChart data={chartData} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
-              <XAxis dataKey="name" tick={{ fontSize: 9, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
-              <Bar dataKey="val" radius={[3, 3, 0, 0]}>
+              <XAxis dataKey="name" tick={{ fontSize: 9, fill: "#5b6e8e" }} axisLine={false} tickLine={false} />
+              <Bar dataKey="val" radius={[4, 4, 0, 0]}>
                 {chartData.map((d) => (
-                  <Cell key={d.id} fill={d.color} fillOpacity={d.id === regionId ? 1 : 0.35} />
+                  <Cell key={d.id} fill={d.color} fillOpacity={d.id === regionId ? 0.95 : 0.3} />
                 ))}
               </Bar>
             </BarChart>
@@ -87,8 +88,12 @@ export function RegionDetailPanel({ regionId }: { regionId: string }) {
       </div>
 
       <button onClick={askAi}
-        className="w-full flex items-center justify-center gap-2 py-2 rounded-lg border border-cyan-400/30 bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-400 text-xs font-medium transition-colors">
-        <Sparkles size={13} /> {t("regionDetail.askAI")}
+        className="group w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-[12.5px] font-medium transition-all"
+        style={{ background: "linear-gradient(180deg, rgba(108,198,224,0.14), rgba(108,198,224,0.06))",
+                 border: "1px solid rgba(108,198,224,0.32)",
+                 color: "#a8dceb",
+                 boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}>
+        <Sparkle size={14} weight="duotone" /> {t("regionDetail.askAI")}
       </button>
 
       <div className="text-[10px] text-text-muted font-mono">WHO/UNICEF JMP · NASA GLIMS · World Bank GFDRR</div>
