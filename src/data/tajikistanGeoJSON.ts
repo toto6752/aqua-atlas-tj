@@ -9,7 +9,7 @@ export const REGIONS_GEOJSON: FeatureCollection<Polygon, RegionProps> = {
   features: [
     {
       type: "Feature",
-      properties: { id: "sughd", name: "Sughd", waterAccess: 81, color: "#1a6bff" },
+      properties: { id: "sughd", name: "Sughd", waterAccess: 81, color: "#4a86d6" },
       geometry: { type: "Polygon", coordinates: [[
         [68.4, 39.5], [69.0, 40.4], [69.5, 40.6], [70.5, 40.4],
         [70.9, 40.05], [70.3, 39.6], [69.6, 39.4], [68.8, 39.3], [68.4, 39.5],
@@ -17,7 +17,7 @@ export const REGIONS_GEOJSON: FeatureCollection<Polygon, RegionProps> = {
     },
     {
       type: "Feature",
-      properties: { id: "gbao", name: "GBAO", waterAccess: 45, color: "#ff4d6a" },
+      properties: { id: "gbao", name: "GBAO", waterAccess: 45, color: "#d76d80" },
       geometry: { type: "Polygon", coordinates: [[
         [70.9, 39.4], [71.6, 39.7], [72.6, 39.6], [74.0, 39.4], [74.9, 38.8],
         [74.7, 37.5], [73.9, 37.0], [72.5, 36.95], [71.5, 37.4], [71.0, 38.0],
@@ -26,7 +26,7 @@ export const REGIONS_GEOJSON: FeatureCollection<Polygon, RegionProps> = {
     },
     {
       type: "Feature",
-      properties: { id: "drs", name: "DRS", waterAccess: 70, color: "#00a8cc" },
+      properties: { id: "drs", name: "DRS", waterAccess: 70, color: "#6cc6e0" },
       geometry: { type: "Polygon", coordinates: [[
         [68.4, 39.3], [68.8, 39.3], [69.6, 39.4], [70.3, 39.6], [70.9, 39.4],
         [70.7, 38.6], [70.5, 38.3], [69.8, 38.0], [69.0, 38.3], [68.5, 38.6],
@@ -35,14 +35,14 @@ export const REGIONS_GEOJSON: FeatureCollection<Polygon, RegionProps> = {
     },
     {
       type: "Feature",
-      properties: { id: "dushanbe", name: "Dushanbe", waterAccess: 94, color: "#00e07a" },
+      properties: { id: "dushanbe", name: "Dushanbe", waterAccess: 94, color: "#6dd0b4" },
       geometry: { type: "Polygon", coordinates: [[
         [68.70, 38.52], [68.86, 38.52], [68.88, 38.62], [68.72, 38.63], [68.70, 38.52],
       ]]},
     },
     {
       type: "Feature",
-      properties: { id: "khatlon", name: "Khatlon", waterAccess: 63, color: "#ffb830" },
+      properties: { id: "khatlon", name: "Khatlon", waterAccess: 63, color: "#e0b878" },
       geometry: { type: "Polygon", coordinates: [[
         [67.6, 38.5], [68.3, 38.6], [68.5, 38.5], [69.0, 38.3], [69.8, 38.0],
         [70.2, 37.6], [70.1, 37.2], [69.4, 36.85], [68.6, 36.78], [67.8, 36.95],
