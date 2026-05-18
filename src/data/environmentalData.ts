@@ -64,11 +64,11 @@ export const REGION_IDS = ["dushanbe", "sughd", "gbao", "khatlon", "drs"] as con
 export type RegionId = (typeof REGION_IDS)[number];
 
 export const REGION_COLORS: Record<RegionId, string> = {
-  dushanbe: "#00e07a",
-  sughd: "#1a6bff",
-  gbao: "#ff4d6a",
-  khatlon: "#ffb830",
-  drs: "#00a8cc",
+  dushanbe: "#6dd0b4",
+  sughd: "#4a86d6",
+  gbao: "#d76d80",
+  khatlon: "#e0b878",
+  drs: "#6cc6e0",
 };
 
 export const REGION_CENTROIDS: Record<RegionId, [number, number]> = {

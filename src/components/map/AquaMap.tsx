@@ -9,55 +9,75 @@ import {
 } from "@/data/tajikistanGeoJSON";
 import { HYDROPOWER_PLANTS, RESERVOIRS, REGION_CENTROIDS, REGION_POP, type RegionId } from "@/data/environmentalData";
 import { MapLegend } from "./MapLegend";
-import { Zap, AlertTriangle } from "lucide-react";
+import { Lightning, WarningCircle } from "@phosphor-icons/react";
 
-// Free, token-less raster tile styles using OpenStreetMap & Esri.
+// Free, token-less raster tile styles — softer, calmer aesthetics
 const STYLE_URLS: Record<string, any> = {
   dark: {
     version: 8,
     sources: {
-      "carto-dark": {
+      "carto-voyager-dark": {
         type: "raster",
         tiles: [
-          "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-          "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-          "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+          "https://a.basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}.png",
+          "https://c.basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}.png",
         ],
         tileSize: 256,
         attribution: "© OpenStreetMap contributors © CARTO",
       },
+      "carto-labels": {
+        type: "raster",
+        tiles: [
+          "https://a.basemaps.cartocdn.com/rastertiles/dark_only_labels/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/rastertiles/dark_only_labels/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+      },
     },
-    layers: [{ id: "carto-dark", type: "raster", source: "carto-dark" }],
+    layers: [
+      { id: "carto-voyager-dark", type: "raster", source: "carto-voyager-dark", paint: { "raster-saturation": -0.25, "raster-brightness-min": 0.05 } },
+      { id: "carto-labels", type: "raster", source: "carto-labels", paint: { "raster-opacity": 0.55 } },
+    ],
   },
   satellite: {
     version: 8,
     sources: {
       esri: {
         type: "raster",
-        tiles: [
-          "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-        ],
+        tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
         tileSize: 256,
         attribution: "Tiles © Esri",
       },
+      "carto-labels": {
+        type: "raster",
+        tiles: [
+          "https://a.basemaps.cartocdn.com/rastertiles/dark_only_labels/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/rastertiles/dark_only_labels/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+      },
     },
-    layers: [{ id: "esri", type: "raster", source: "esri" }],
+    layers: [
+      { id: "esri", type: "raster", source: "esri", paint: { "raster-brightness-min": 0.05 } },
+      { id: "carto-labels", type: "raster", source: "carto-labels", paint: { "raster-opacity": 0.65 } },
+    ],
   },
   terrain: {
     version: 8,
     sources: {
-      osm: {
+      voyager: {
         type: "raster",
         tiles: [
-          "https://a.tile.opentopomap.org/{z}/{x}/{y}.png",
-          "https://b.tile.opentopomap.org/{z}/{x}/{y}.png",
-          "https://c.tile.opentopomap.org/{z}/{x}/{y}.png",
+          "https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+          "https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
         ],
         tileSize: 256,
-        attribution: "© OpenTopoMap (CC-BY-SA)",
+        attribution: "© OpenStreetMap contributors © CARTO",
       },
     },
-    layers: [{ id: "osm", type: "raster", source: "osm" }],
+    layers: [{ id: "voyager", type: "raster", source: "voyager", paint: { "raster-saturation": -0.15 } }],
   },
 };
 
@@ -71,7 +91,7 @@ export function AquaMap() {
     if (!ref.current || !selectedRegion) return;
     const c = REGION_CENTROIDS[selectedRegion as RegionId];
     if (!c) return;
-    ref.current.flyTo({ center: c, zoom: 7.5, duration: 800 });
+    ref.current.flyTo({ center: c, zoom: 7.5, duration: 1000, essential: true });
   }, [selectedRegion]);
 
   const onClick = (e: MapMouseEvent) => {
@@ -95,6 +115,10 @@ export function AquaMap() {
 
   return (
     <div className="relative h-full w-full">
+      {/* Soft vignette overlay over the map */}
+      <div className="pointer-events-none absolute inset-0 z-[5]"
+        style={{ background: "radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(10,19,34,0.45) 100%)" }} />
+
       <Map
         ref={ref}
         initialViewState={{ longitude: 70.8, latitude: 38.8, zoom: 6.2 }}
@@ -118,68 +142,85 @@ export function AquaMap() {
                 "fill-color": ["get", "color"],
                 "fill-opacity": [
                   "case",
-                  ["==", ["get", "id"], selectedRegion ?? ""], 0.45,
-                  0.20,
+                  ["==", ["get", "id"], selectedRegion ?? ""], 0.32,
+                  0.14,
                 ],
               }}
             />
             <Layer
               id="region-outline"
               type="line"
-              paint={{ "line-color": ["get", "color"], "line-width": 1.5, "line-opacity": 0.8 }}
+              paint={{
+                "line-color": ["get", "color"],
+                "line-width": [
+                  "case",
+                  ["==", ["get", "id"], selectedRegion ?? ""], 2,
+                  1.2,
+                ],
+                "line-opacity": 0.7,
+                "line-blur": 0.4,
+              }}
             />
           </Source>
         )}
 
         {activeLayers.populationDensity && (
           <Source id="popdens" type="geojson" data={POP_DENSITY_GEOJSON}>
-            <Layer id="popdens-fill" type="fill" paint={{ "fill-color": "#1a6bff", "fill-opacity": 0.35 }} />
-            <Layer id="popdens-line" type="line" paint={{ "line-color": "#1a6bff", "line-width": 0.8, "line-opacity": 0.6 }} />
+            <Layer id="popdens-fill" type="fill" paint={{ "fill-color": "#4a86d6", "fill-opacity": 0.22 }} />
+            <Layer id="popdens-line" type="line" paint={{ "line-color": "#4a86d6", "line-width": 0.8, "line-opacity": 0.5 }} />
           </Source>
         )}
 
         {activeLayers.agriculturalZones && (
           <Source id="agri" type="geojson" data={AGRI_ZONES_GEOJSON}>
-            <Layer id="agri-fill" type="fill" paint={{ "fill-color": "#00e5c0", "fill-opacity": 0.18 }} />
-            <Layer id="agri-line" type="line" paint={{ "line-color": "#00e5c0", "line-width": 0.8, "line-dasharray": [3, 2], "line-opacity": 0.6 }} />
+            <Layer id="agri-fill" type="fill" paint={{ "fill-color": "#6dd0b4", "fill-opacity": 0.14 }} />
+            <Layer id="agri-line" type="line" paint={{ "line-color": "#6dd0b4", "line-width": 0.8, "line-dasharray": [3, 3], "line-opacity": 0.5 }} />
           </Source>
         )}
 
         {activeLayers.climateRisks && (
           <Source id="risks" type="geojson" data={RISK_ZONES_GEOJSON}>
-            <Layer id="risks-fill" type="fill" paint={{ "fill-color": "#ff4d6a", "fill-opacity": 0.22 }} />
-            <Layer id="risks-line" type="line" paint={{ "line-color": "#ff4d6a", "line-width": 1, "line-dasharray": [2, 2] }} />
+            <Layer id="risks-fill" type="fill" paint={{ "fill-color": "#d76d80", "fill-opacity": 0.16 }} />
+            <Layer id="risks-line" type="line" paint={{ "line-color": "#d76d80", "line-width": 1, "line-dasharray": [2, 3], "line-opacity": 0.65 }} />
           </Source>
         )}
 
         {activeLayers.glaciers && (
           <Source id="glaciers" type="geojson" data={GLACIERS_GEOJSON}>
-            <Layer id="glaciers-fill" type="fill" paint={{ "fill-color": "#dcefff", "fill-opacity": 0.55 }} />
-            <Layer id="glaciers-line" type="line" paint={{ "line-color": "#bfe2ff", "line-width": 0.8 }} />
+            <Layer id="glaciers-fill" type="fill" paint={{ "fill-color": "#dcebf6", "fill-opacity": 0.42 }} />
+            <Layer id="glaciers-line" type="line" paint={{ "line-color": "#bcd9ea", "line-width": 0.7, "line-opacity": 0.65 }} />
           </Source>
         )}
 
         {activeLayers.rivers && (
           <Source id="rivers" type="geojson" data={RIVERS_GEOJSON}>
-            <Layer id="rivers-line" type="line" paint={{ "line-color": "#00d4ff", "line-width": 1.8, "line-opacity": 0.85 }} />
-            <Layer id="rivers-glow" type="line" paint={{ "line-color": "#00d4ff", "line-width": 6, "line-opacity": 0.10, "line-blur": 4 }} />
+            <Layer id="rivers-glow" type="line" paint={{ "line-color": "#6cc6e0", "line-width": 5, "line-opacity": 0.10, "line-blur": 3 }} />
+            <Layer id="rivers-line" type="line" paint={{ "line-color": "#8ad7eb", "line-width": 1.6, "line-opacity": 0.85 }} />
           </Source>
         )}
 
         {activeLayers.reservoirs && RESERVOIRS.map((r) => (
           <Marker key={r.id} longitude={r.coordinates[0]} latitude={r.coordinates[1]}>
-            <div className="rounded-full border border-blue-500/60 bg-blue-500/30"
-              style={{ width: 18 + r.area / 30, height: 12 + r.area / 50 }} />
+            <div className="rounded-full"
+              style={{
+                width: 16 + r.area / 30, height: 12 + r.area / 50,
+                background: "radial-gradient(circle, rgba(74,134,214,0.55), rgba(74,134,214,0.15))",
+                border: "1px solid rgba(138,178,232,0.55)",
+              }} />
           </Marker>
         ))}
 
         {activeLayers.hydropower && HYDROPOWER_PLANTS.map((p) => (
           <Marker key={p.id} longitude={p.coordinates[0]} latitude={p.coordinates[1]} anchor="center">
-            <div className={`flex items-center justify-center rounded-md border ${
-              p.status === "operational" ? "border-amber-400/70 bg-amber-400/20" : "border-amber-400/40 bg-amber-400/10 animate-pulse"
-            }`} style={{ width: 22, height: 22, boxShadow: "0 0 12px -2px rgba(255,184,48,0.5)" }}
+            <div className={`flex items-center justify-center rounded-lg ${p.status !== "operational" ? "animate-pulse-dot" : ""}`}
+              style={{
+                width: 22, height: 22,
+                background: "linear-gradient(135deg, rgba(224,184,120,0.30), rgba(224,184,120,0.12))",
+                border: "1px solid rgba(224,184,120,0.6)",
+                boxShadow: "0 4px 12px -4px rgba(224,184,120,0.4)",
+              }}
               title={`${p.name} · ${p.capacity} MW`}>
-              <Zap size={12} className="text-amber-400" />
+              <Lightning size={12} weight="fill" className="text-amber-400" />
             </div>
           </Marker>
         ))}
@@ -187,37 +228,43 @@ export function AquaMap() {
         {activeLayers.waterAccess && (Object.keys(REGION_CENTROIDS) as RegionId[]).map((id) => {
           const c = REGION_CENTROIDS[id];
           const pop = REGION_POP[id];
-          const size = Math.max(10, Math.min(30, Math.sqrt(pop) / 35));
+          const size = Math.max(10, Math.min(28, Math.sqrt(pop) / 38));
           return (
             <Marker key={id} longitude={c[0]} latitude={c[1]}>
-              <div className="rounded-full border border-cyan-400/60 bg-cyan-400/15"
-                style={{ width: size, height: size }} />
+              <div className="rounded-full"
+                style={{
+                  width: size, height: size,
+                  background: "radial-gradient(circle, rgba(108,198,224,0.35), rgba(108,198,224,0.05))",
+                  border: "1px solid rgba(108,198,224,0.5)",
+                }} />
             </Marker>
           );
         })}
 
         {activeLayers.climateRisks && (
           <Marker longitude={68.7} latitude={37.4}>
-            <AlertTriangle size={16} className="text-risk-red drop-shadow" />
+            <WarningCircle size={18} weight="duotone" className="text-risk-red drop-shadow" />
           </Marker>
         )}
       </Map>
 
       {hover && (
         <div
-          className="pointer-events-none absolute z-20 glass border border-border-subtle rounded-lg px-3 py-2 text-xs text-text-primary"
-          style={{ left: hover.x + 12, top: hover.y + 12 }}
+          className="pointer-events-none absolute z-20 glass border border-border-subtle rounded-xl px-3.5 py-2.5 text-[12px] text-text-primary shadow-[var(--shadow-elevated)]"
+          style={{ left: hover.x + 14, top: hover.y + 14 }}
         >
-          <div className="font-medium">{hover.name}</div>
-          <div className="font-mono text-cyan-400">{hover.access}% access</div>
+          <div className="font-medium tracking-tight">{hover.name}</div>
+          <div className="font-mono text-cyan-400 text-[11px] mt-0.5">{hover.access}% water access</div>
         </div>
       )}
 
-      <div className="absolute top-4 left-4 z-10 panel !p-1 flex">
+      <div className="absolute top-5 left-5 z-10 flex rounded-2xl p-1 glass border border-border-subtle shadow-[var(--shadow-soft)]">
         {(["dark", "satellite", "terrain"] as const).map((s) => (
           <button key={s} onClick={() => setMapStyle(s)}
-            className={`px-3 py-1.5 text-[11px] uppercase font-mono rounded-md transition-colors ${
-              mapStyle === s ? "bg-cyan-400/15 text-cyan-400" : "text-text-secondary hover:text-text-primary"
+            className={`px-3.5 py-1.5 text-[11px] font-mono tracking-wide rounded-xl transition-all ${
+              mapStyle === s
+                ? "bg-cyan-400/15 text-cyan-400 shadow-[inset_0_0_0_1px_rgba(108,198,224,0.30)]"
+                : "text-text-secondary hover:text-text-primary"
             }`}>
             {t(`mapControls.${s}`)}
           </button>
