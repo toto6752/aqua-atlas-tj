@@ -76,7 +76,7 @@ export function RegionDetailPanel({ regionId }: { regionId: string }) {
         <div className="h-20">
           <ResponsiveContainer>
             <BarChart data={chartData} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
-              <XAxis dataKey="name" tick={{ fontSize: 9, fill: "#5b6e8e" }} axisLine={false} tickLine={false} />
+              <XAxis dataKey="name" tick={{ fontSize: 9, fill: "#9CA3AF" }} axisLine={false} tickLine={false} />
               <Bar dataKey="val" radius={[4, 4, 0, 0]}>
                 {chartData.map((d) => (
                   <Cell key={d.id} fill={d.color} fillOpacity={d.id === regionId ? 0.95 : 0.3} />

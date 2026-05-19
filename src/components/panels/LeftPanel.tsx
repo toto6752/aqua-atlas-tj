@@ -22,7 +22,7 @@ export function LeftPanel() {
   const activeCount = Object.values(activeLayers).filter(Boolean).length;
 
   return (
-    <aside className="w-[288px] shrink-0 border-r border-border-subtle bg-navy-900/40 backdrop-blur-xl overflow-y-auto scroll-thin">
+    <aside className="w-[288px] shrink-0 border-r border-border-subtle bg-white/70 backdrop-blur-xl overflow-y-auto scroll-thin">
       <div className="p-5">
         <div className="flex items-center justify-between mb-4">
           <div>

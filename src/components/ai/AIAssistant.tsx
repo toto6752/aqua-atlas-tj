@@ -50,7 +50,7 @@ export function AIAssistant() {
   const prompts = t("ai.suggestedPrompts", { returnObjects: true }) as string[];
 
   return (
-    <aside className="w-[320px] shrink-0 border-l border-border-subtle flex flex-col bg-navy-900/40 backdrop-blur-xl">
+    <aside className="w-[320px] shrink-0 border-l border-border-subtle flex flex-col bg-white/70 backdrop-blur-xl">
       <div className="p-4 border-b border-border-subtle flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <div className="relative w-9 h-9 rounded-xl flex items-center justify-center"
