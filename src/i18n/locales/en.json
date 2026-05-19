@@ -146,7 +146,7 @@
     "resetView": "Reset view",
     "satellite": "Satellite",
     "terrain": "Terrain",
-    "dark": "Dark",
+    "dark": "Light",
     "missingToken": "Add VITE_MAPBOX_TOKEN as a build secret to enable the interactive map.",
     "missingTokenHint": "Workspace Settings → Build Secrets → VITE_MAPBOX_TOKEN"
   }

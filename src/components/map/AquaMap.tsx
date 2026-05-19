@@ -16,12 +16,12 @@ const STYLE_URLS: Record<string, any> = {
   dark: {
     version: 8,
     sources: {
-      "carto-voyager-dark": {
+      "carto-positron": {
         type: "raster",
         tiles: [
-          "https://a.basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}.png",
-          "https://b.basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}.png",
-          "https://c.basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}.png",
+          "https://a.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}.png",
+          "https://c.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}.png",
         ],
         tileSize: 256,
         attribution: "© OpenStreetMap contributors © CARTO",
@@ -29,15 +29,15 @@ const STYLE_URLS: Record<string, any> = {
       "carto-labels": {
         type: "raster",
         tiles: [
-          "https://a.basemaps.cartocdn.com/rastertiles/dark_only_labels/{z}/{x}/{y}.png",
-          "https://b.basemaps.cartocdn.com/rastertiles/dark_only_labels/{z}/{x}/{y}.png",
+          "https://a.basemaps.cartocdn.com/rastertiles/light_only_labels/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/rastertiles/light_only_labels/{z}/{x}/{y}.png",
         ],
         tileSize: 256,
       },
     },
     layers: [
-      { id: "carto-voyager-dark", type: "raster", source: "carto-voyager-dark", paint: { "raster-saturation": -0.25, "raster-brightness-min": 0.05 } },
-      { id: "carto-labels", type: "raster", source: "carto-labels", paint: { "raster-opacity": 0.55 } },
+      { id: "carto-positron", type: "raster", source: "carto-positron", paint: { "raster-saturation": -0.15 } },
+      { id: "carto-labels", type: "raster", source: "carto-labels", paint: { "raster-opacity": 0.9 } },
     ],
   },
   satellite: {
@@ -52,15 +52,15 @@ const STYLE_URLS: Record<string, any> = {
       "carto-labels": {
         type: "raster",
         tiles: [
-          "https://a.basemaps.cartocdn.com/rastertiles/dark_only_labels/{z}/{x}/{y}.png",
-          "https://b.basemaps.cartocdn.com/rastertiles/dark_only_labels/{z}/{x}/{y}.png",
+          "https://a.basemaps.cartocdn.com/rastertiles/light_only_labels/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/rastertiles/light_only_labels/{z}/{x}/{y}.png",
         ],
         tileSize: 256,
       },
     },
     layers: [
-      { id: "esri", type: "raster", source: "esri", paint: { "raster-brightness-min": 0.05 } },
-      { id: "carto-labels", type: "raster", source: "carto-labels", paint: { "raster-opacity": 0.65 } },
+      { id: "esri", type: "raster", source: "esri" },
+      { id: "carto-labels", type: "raster", source: "carto-labels", paint: { "raster-opacity": 0.9 } },
     ],
   },
   terrain: {
@@ -77,7 +77,7 @@ const STYLE_URLS: Record<string, any> = {
         attribution: "© OpenStreetMap contributors © CARTO",
       },
     },
-    layers: [{ id: "voyager", type: "raster", source: "voyager", paint: { "raster-saturation": -0.15 } }],
+    layers: [{ id: "voyager", type: "raster", source: "voyager" }],
   },
 };
 
@@ -117,7 +117,7 @@ export function AquaMap() {
     <div className="relative h-full w-full">
       {/* Soft vignette overlay over the map */}
       <div className="pointer-events-none absolute inset-0 z-[5]"
-        style={{ background: "radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(10,19,34,0.45) 100%)" }} />
+        style={{ background: "radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(247,249,252,0.45) 100%)" }} />
 
       <Map
         ref={ref}
@@ -204,8 +204,8 @@ export function AquaMap() {
             <div className="rounded-full"
               style={{
                 width: 16 + r.area / 30, height: 12 + r.area / 50,
-                background: "radial-gradient(circle, rgba(74,134,214,0.55), rgba(74,134,214,0.15))",
-                border: "1px solid rgba(138,178,232,0.55)",
+                background: "radial-gradient(circle, rgba(79,125,243,0.55), rgba(79,125,243,0.15))",
+                border: "1px solid rgba(79,125,243,0.55)",
               }} />
           </Marker>
         ))}
@@ -215,9 +215,9 @@ export function AquaMap() {
             <div className={`flex items-center justify-center rounded-lg ${p.status !== "operational" ? "animate-pulse-dot" : ""}`}
               style={{
                 width: 22, height: 22,
-                background: "linear-gradient(135deg, rgba(224,184,120,0.30), rgba(224,184,120,0.12))",
-                border: "1px solid rgba(224,184,120,0.6)",
-                boxShadow: "0 4px 12px -4px rgba(224,184,120,0.4)",
+                background: "linear-gradient(135deg, rgba(245,158,11,0.30), rgba(245,158,11,0.12))",
+                border: "1px solid rgba(245,158,11,0.6)",
+                boxShadow: "0 4px 12px -4px rgba(245,158,11,0.4)",
               }}
               title={`${p.name} · ${p.capacity} MW`}>
               <Lightning size={12} weight="fill" className="text-amber-400" />
@@ -234,8 +234,8 @@ export function AquaMap() {
               <div className="rounded-full"
                 style={{
                   width: size, height: size,
-                  background: "radial-gradient(circle, rgba(108,198,224,0.35), rgba(108,198,224,0.05))",
-                  border: "1px solid rgba(108,198,224,0.5)",
+                  background: "radial-gradient(circle, rgba(79,125,243,0.35), rgba(79,125,243,0.05))",
+                  border: "1px solid rgba(79,125,243,0.5)",
                 }} />
             </Marker>
           );
@@ -250,20 +250,20 @@ export function AquaMap() {
 
       {hover && (
         <div
-          className="pointer-events-none absolute z-20 glass border border-border-subtle rounded-xl px-3.5 py-2.5 text-[12px] text-text-primary shadow-[var(--shadow-elevated)]"
+          className="pointer-events-none absolute z-20 bg-white border border-border-subtle rounded-xl px-3.5 py-2.5 text-[12px] text-text-primary shadow-[var(--shadow-elevated)]"
           style={{ left: hover.x + 14, top: hover.y + 14 }}
         >
           <div className="font-medium tracking-tight">{hover.name}</div>
-          <div className="font-mono text-cyan-400 text-[11px] mt-0.5">{hover.access}% water access</div>
+          <div className="font-mono text-primary text-[11px] mt-0.5">{hover.access}% water access</div>
         </div>
       )}
 
-      <div className="absolute top-5 left-5 z-10 flex rounded-2xl p-1 glass border border-border-subtle shadow-[var(--shadow-soft)]">
+      <div className="absolute top-5 left-5 z-10 flex rounded-2xl p-1 bg-white/90 backdrop-blur border border-border-subtle shadow-[var(--shadow-soft)]">
         {(["dark", "satellite", "terrain"] as const).map((s) => (
           <button key={s} onClick={() => setMapStyle(s)}
             className={`px-3.5 py-1.5 text-[11px] font-mono tracking-wide rounded-xl transition-all ${
               mapStyle === s
-                ? "bg-cyan-400/15 text-cyan-400 shadow-[inset_0_0_0_1px_rgba(108,198,224,0.30)]"
+                ? "bg-primary/10 text-primary shadow-[inset_0_0_0_1px_rgba(79,125,243,0.30)]"
                 : "text-text-secondary hover:text-text-primary"
             }`}>
             {t(`mapControls.${s}`)}

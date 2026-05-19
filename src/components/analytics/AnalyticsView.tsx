@@ -11,9 +11,9 @@ import { Drop, Mountains, WarningCircle, Lightning, TrendUp, TrendDown } from "@
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const tooltipStyle = {
-  contentStyle: { background: "rgba(17,29,51,0.95)", border: "1px solid #2a3f5e", borderRadius: 10, fontSize: 12, boxShadow: "0 12px 28px -10px rgba(0,0,0,0.5)" },
-  labelStyle: { color: "#93a4be", fontFamily: "JetBrains Mono" },
-  itemStyle: { color: "#e8eef9" },
+  contentStyle: { background: "rgba(255,255,255,0.95)", border: "1px solid rgba(17,24,39,0.08)", borderRadius: 10, fontSize: 12, boxShadow: "0 12px 28px -10px rgba(0,0,0,0.5)" },
+  labelStyle: { color: "#6B7280", fontFamily: "JetBrains Mono" },
+  itemStyle: { color: "#111827" },
 } as const;
 
 function MetricCard({
@@ -124,10 +124,10 @@ export default function AnalyticsView() {
           <div className="h-64">
             <ResponsiveContainer>
               <BarChart data={regional} margin={{ top: 8, right: 8, left: 0, bottom: 8 }}>
-                <CartesianGrid stroke="#1d2e49" vertical={false} />
-                <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} unit="%" />
-                <Tooltip {...tooltipStyle} cursor={{ fill: "rgba(108,198,224,0.04)" }} />
+                <CartesianGrid stroke="rgba(17,24,39,0.06)" vertical={false} />
+                <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#6B7280" }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 11, fill: "#6B7280" }} axisLine={false} tickLine={false} unit="%" />
+                <Tooltip {...tooltipStyle} cursor={{ fill: "rgba(79,125,243,0.04)" }} />
                 <Bar dataKey="val" radius={[8, 8, 0, 0]}>
                   {regional.map((d) => <Cell key={d.id} fill={d.color} fillOpacity={0.85} />)}
                 </Bar>
@@ -150,15 +150,15 @@ export default function AnalyticsView() {
                     <stop offset="100%" stopColor="#4a86d6" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid stroke="#1d2e49" vertical={false} />
-                <XAxis dataKey="y" tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} />
-                <YAxis yAxisId="l" tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} />
-                <YAxis yAxisId="r" orientation="right" tick={{ fontSize: 11, fill: "#e0b878" }} axisLine={false} tickLine={false} />
+                <CartesianGrid stroke="rgba(17,24,39,0.06)" vertical={false} />
+                <XAxis dataKey="y" tick={{ fontSize: 11, fill: "#6B7280" }} axisLine={false} tickLine={false} />
+                <YAxis yAxisId="l" tick={{ fontSize: 11, fill: "#6B7280" }} axisLine={false} tickLine={false} />
+                <YAxis yAxisId="r" orientation="right" tick={{ fontSize: 11, fill: "#F59E0B" }} axisLine={false} tickLine={false} />
                 <Tooltip {...tooltipStyle} />
-                <Legend wrapperStyle={{ fontSize: 11, color: "#93a4be" }} />
+                <Legend wrapperStyle={{ fontSize: 11, color: "#6B7280" }} />
                 <Area yAxisId="l" type="monotone" dataKey="discharge" name="Discharge km³" stroke="#4a86d6" fill="url(#dischargeFill)" strokeWidth={2} />
                 <Line yAxisId="r" type="monotone" dataKey="temp" name="Temp anomaly °C" stroke="#e0b878" strokeWidth={2} dot={{ r: 3 }} />
-                <ReferenceLine yAxisId="r" y={0} stroke="#2a3f5e" strokeDasharray="3 3" />
+                <ReferenceLine yAxisId="r" y={0} stroke="rgba(17,24,39,0.10)" strokeDasharray="3 3" />
               </ComposedChart>
             </ResponsiveContainer>
           </div>
@@ -178,9 +178,9 @@ export default function AnalyticsView() {
                     <stop offset="100%" stopColor="#6cc6e0" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid stroke="#1d2e49" vertical={false} />
-                <XAxis dataKey="y" tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} unit="%" />
+                <CartesianGrid stroke="rgba(17,24,39,0.06)" vertical={false} />
+                <XAxis dataKey="y" tick={{ fontSize: 11, fill: "#6B7280" }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 11, fill: "#6B7280" }} axisLine={false} tickLine={false} unit="%" />
                 <Tooltip {...tooltipStyle} />
                 <Area type="monotone" dataKey="loss" stroke="#6cc6e0" fill="url(#glFill)" strokeWidth={2} name="Mass loss vs 2017" />
               </AreaChart>
@@ -196,11 +196,11 @@ export default function AnalyticsView() {
           <div className="h-64">
             <ResponsiveContainer>
               <BarChart data={precipData} margin={{ top: 8, right: 8, left: 0, bottom: 8 }}>
-                <CartesianGrid stroke="#1d2e49" vertical={false} />
-                <XAxis dataKey="y" tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} unit="%" />
-                <Tooltip {...tooltipStyle} cursor={{ fill: "rgba(108,198,224,0.04)" }} />
-                <ReferenceLine y={0} stroke="#2a3f5e" />
+                <CartesianGrid stroke="rgba(17,24,39,0.06)" vertical={false} />
+                <XAxis dataKey="y" tick={{ fontSize: 11, fill: "#6B7280" }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 11, fill: "#6B7280" }} axisLine={false} tickLine={false} unit="%" />
+                <Tooltip {...tooltipStyle} cursor={{ fill: "rgba(79,125,243,0.04)" }} />
+                <ReferenceLine y={0} stroke="rgba(17,24,39,0.10)" />
                 <Bar dataKey="v" radius={[4, 4, 4, 4]}>
                   {precipData.map((d, i) => <Cell key={i} fill={d.v >= 0 ? "#6dd0b4" : "#d76d80"} fillOpacity={0.85} />)}
                 </Bar>
@@ -227,8 +227,8 @@ export default function AnalyticsView() {
         <div className="h-64">
           <ResponsiveContainer>
             <RadarChart data={radarData}>
-              <PolarGrid stroke="#2a3f5e" />
-              <PolarAngleAxis dataKey="metric" tick={{ fontSize: 11, fill: "#93a4be" }} />
+              <PolarGrid stroke="rgba(17,24,39,0.10)" />
+              <PolarAngleAxis dataKey="metric" tick={{ fontSize: 11, fill: "#6B7280" }} />
               <Radar dataKey="v" stroke={REGION_COLORS[activeRegion]} fill={REGION_COLORS[activeRegion]} fillOpacity={0.25} strokeWidth={1.5} />
               <Tooltip {...tooltipStyle} />
             </RadarChart>

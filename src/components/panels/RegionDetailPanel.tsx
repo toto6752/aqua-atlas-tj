@@ -76,7 +76,7 @@ export function RegionDetailPanel({ regionId }: { regionId: string }) {
         <div className="h-20">
           <ResponsiveContainer>
             <BarChart data={chartData} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
-              <XAxis dataKey="name" tick={{ fontSize: 9, fill: "#5b6e8e" }} axisLine={false} tickLine={false} />
+              <XAxis dataKey="name" tick={{ fontSize: 9, fill: "#9CA3AF" }} axisLine={false} tickLine={false} />
               <Bar dataKey="val" radius={[4, 4, 0, 0]}>
                 {chartData.map((d) => (
                   <Cell key={d.id} fill={d.color} fillOpacity={d.id === regionId ? 0.95 : 0.3} />
@@ -89,8 +89,8 @@ export function RegionDetailPanel({ regionId }: { regionId: string }) {
 
       <button onClick={askAi}
         className="group w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-[12.5px] font-medium transition-all"
-        style={{ background: "linear-gradient(180deg, rgba(108,198,224,0.14), rgba(108,198,224,0.06))",
-                 border: "1px solid rgba(108,198,224,0.32)",
+        style={{ background: "linear-gradient(180deg, rgba(79,125,243,0.14), rgba(79,125,243,0.06))",
+                 border: "1px solid rgba(79,125,243,0.32)",
                  color: "#a8dceb",
                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}>
         <Sparkle size={14} weight="duotone" /> {t("regionDetail.askAI")}

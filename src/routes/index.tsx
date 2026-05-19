@@ -28,7 +28,7 @@ function Index() {
   }, [language, i18n]);
 
   return (
-    <div className="app-shell h-screen flex flex-col bg-navy-950 text-text-primary overflow-hidden relative">
+    <div className="app-shell h-screen flex flex-col bg-background text-text-primary overflow-hidden relative">
       <div className="relative z-10 flex flex-col h-full">
         <Navbar />
         <main className="flex-1 flex overflow-hidden">

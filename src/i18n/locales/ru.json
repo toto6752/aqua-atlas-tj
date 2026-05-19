@@ -146,7 +146,7 @@
     "resetView": "Сбросить вид",
     "satellite": "Спутник",
     "terrain": "Рельеф",
-    "dark": "Тёмный",
+    "dark": "Светлый",
     "missingToken": "Добавьте VITE_MAPBOX_TOKEN в Build Secrets для активации карты.",
     "missingTokenHint": "Workspace Settings → Build Secrets → VITE_MAPBOX_TOKEN"
   }

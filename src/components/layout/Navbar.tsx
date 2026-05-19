@@ -7,9 +7,9 @@ import type { ActiveView, Lang } from "@/types";
 function Logo() {
   return (
     <div className="relative w-9 h-9 rounded-xl flex items-center justify-center"
-      style={{ background: "linear-gradient(135deg, rgba(108,198,224,0.18), rgba(109,208,180,0.12))",
-               border: "1px solid rgba(108,198,224,0.28)",
-               boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 12px -4px rgba(108,198,224,0.25)" }}>
+      style={{ background: "linear-gradient(135deg, rgba(79,125,243,0.18), rgba(16,185,129,0.12))",
+               border: "1px solid rgba(79,125,243,0.28)",
+               boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 12px -4px rgba(79,125,243,0.25)" }}>
       <Drop size={18} weight="duotone" className="text-cyan-400" />
     </div>
   );
@@ -60,8 +60,8 @@ export function Navbar() {
                 <motion.span
                   layoutId="activeTabBg"
                   className="absolute inset-0 rounded-full"
-                  style={{ background: "linear-gradient(180deg, rgba(108,198,224,0.16), rgba(108,198,224,0.08))",
-                           boxShadow: "inset 0 0 0 1px rgba(108,198,224,0.30), 0 4px 14px -6px rgba(108,198,224,0.30)" }}
+                  style={{ background: "linear-gradient(180deg, rgba(79,125,243,0.16), rgba(79,125,243,0.08))",
+                           boxShadow: "inset 0 0 0 1px rgba(79,125,243,0.30), 0 4px 14px -6px rgba(79,125,243,0.30)" }}
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
