@@ -54,8 +54,8 @@ export function AIAssistant() {
       <div className="p-4 border-b border-border-subtle flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <div className="relative w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: "linear-gradient(135deg, rgba(108,198,224,0.18), rgba(109,208,180,0.10))",
-                     border: "1px solid rgba(108,198,224,0.30)",
+            style={{ background: "linear-gradient(135deg, rgba(79,125,243,0.18), rgba(16,185,129,0.10))",
+                     border: "1px solid rgba(79,125,243,0.30)",
                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}>
             <Sparkle size={15} weight="duotone" className="text-cyan-400" />
           </div>
@@ -106,8 +106,8 @@ export function AIAssistant() {
                     : "bg-panel-mid/60 border border-border-subtle/60 text-text-primary rounded-bl-md"
                 }`}
                 style={isUser ? {
-                  background: "linear-gradient(180deg, rgba(108,198,224,0.16), rgba(108,198,224,0.08))",
-                  border: "1px solid rgba(108,198,224,0.28)",
+                  background: "linear-gradient(180deg, rgba(79,125,243,0.16), rgba(79,125,243,0.08))",
+                  border: "1px solid rgba(79,125,243,0.28)",
                 } : undefined}>
                   {text}
                 </div>
@@ -143,9 +143,9 @@ export function AIAssistant() {
           <button type="submit" disabled={!input.trim() || isLoading}
             className="shrink-0 w-9 h-9 rounded-xl text-cyan-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all"
             style={{ background: input.trim() && !isLoading
-              ? "linear-gradient(135deg, rgba(108,198,224,0.28), rgba(109,208,180,0.20))"
-              : "rgba(24,41,66,0.6)",
-              border: "1px solid rgba(108,198,224,0.30)" }}>
+              ? "linear-gradient(135deg, rgba(79,125,243,0.28), rgba(16,185,129,0.20))"
+              : "rgba(243,245,249,0.6)",
+              border: "1px solid rgba(79,125,243,0.30)" }}>
             <PaperPlaneTilt size={14} weight="fill" />
           </button>
         </div>

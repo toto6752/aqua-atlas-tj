@@ -117,7 +117,7 @@ export function AquaMap() {
     <div className="relative h-full w-full">
       {/* Soft vignette overlay over the map */}
       <div className="pointer-events-none absolute inset-0 z-[5]"
-        style={{ background: "radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(10,19,34,0.45) 100%)" }} />
+        style={{ background: "radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(247,249,252,0.45) 100%)" }} />
 
       <Map
         ref={ref}
@@ -204,8 +204,8 @@ export function AquaMap() {
             <div className="rounded-full"
               style={{
                 width: 16 + r.area / 30, height: 12 + r.area / 50,
-                background: "radial-gradient(circle, rgba(74,134,214,0.55), rgba(74,134,214,0.15))",
-                border: "1px solid rgba(138,178,232,0.55)",
+                background: "radial-gradient(circle, rgba(79,125,243,0.55), rgba(79,125,243,0.15))",
+                border: "1px solid rgba(79,125,243,0.55)",
               }} />
           </Marker>
         ))}
@@ -215,9 +215,9 @@ export function AquaMap() {
             <div className={`flex items-center justify-center rounded-lg ${p.status !== "operational" ? "animate-pulse-dot" : ""}`}
               style={{
                 width: 22, height: 22,
-                background: "linear-gradient(135deg, rgba(224,184,120,0.30), rgba(224,184,120,0.12))",
-                border: "1px solid rgba(224,184,120,0.6)",
-                boxShadow: "0 4px 12px -4px rgba(224,184,120,0.4)",
+                background: "linear-gradient(135deg, rgba(245,158,11,0.30), rgba(245,158,11,0.12))",
+                border: "1px solid rgba(245,158,11,0.6)",
+                boxShadow: "0 4px 12px -4px rgba(245,158,11,0.4)",
               }}
               title={`${p.name} · ${p.capacity} MW`}>
               <Lightning size={12} weight="fill" className="text-amber-400" />
@@ -234,8 +234,8 @@ export function AquaMap() {
               <div className="rounded-full"
                 style={{
                   width: size, height: size,
-                  background: "radial-gradient(circle, rgba(108,198,224,0.35), rgba(108,198,224,0.05))",
-                  border: "1px solid rgba(108,198,224,0.5)",
+                  background: "radial-gradient(circle, rgba(79,125,243,0.35), rgba(79,125,243,0.05))",
+                  border: "1px solid rgba(79,125,243,0.5)",
                 }} />
             </Marker>
           );
@@ -263,7 +263,7 @@ export function AquaMap() {
           <button key={s} onClick={() => setMapStyle(s)}
             className={`px-3.5 py-1.5 text-[11px] font-mono tracking-wide rounded-xl transition-all ${
               mapStyle === s
-                ? "bg-cyan-400/15 text-cyan-400 shadow-[inset_0_0_0_1px_rgba(108,198,224,0.30)]"
+                ? "bg-cyan-400/15 text-cyan-400 shadow-[inset_0_0_0_1px_rgba(79,125,243,0.30)]"
                 : "text-text-secondary hover:text-text-primary"
             }`}>
             {t(`mapControls.${s}`)}

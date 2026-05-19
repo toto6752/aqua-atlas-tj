@@ -48,8 +48,8 @@ export function LeftPanel() {
               >
                 <div className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all`}
                   style={{
-                    background: on ? `${color}1c` : "rgba(24,41,66,0.5)",
-                    border: `1px solid ${on ? `${color}40` : "rgba(29,46,73,0.6)"}`,
+                    background: on ? `${color}1c` : "rgba(243,245,249,0.5)",
+                    border: `1px solid ${on ? `${color}40` : "rgba(17,24,39,0.6)"}`,
                   }}>
                   <Icon size={14} weight="duotone" style={{ color: on ? color : "#5b6e8e" }} />
                 </div>
@@ -58,7 +58,7 @@ export function LeftPanel() {
                 </span>
                 <motion.div
                   className={`w-8 h-4 rounded-full p-0.5 flex transition-colors ${on ? "justify-end" : "justify-start"}`}
-                  style={{ background: on ? "rgba(108,198,224,0.4)" : "rgba(36,54,82,0.7)" }}
+                  style={{ background: on ? "rgba(79,125,243,0.4)" : "rgba(17,24,39,0.7)" }}
                   layout transition={{ type: "spring", stiffness: 500, damping: 32 }}
                 >
                   <motion.span layout className="w-3 h-3 rounded-full bg-white/90 shadow-sm" />

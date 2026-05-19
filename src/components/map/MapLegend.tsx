@@ -22,7 +22,7 @@ export function MapLegend() {
           <span className="inline-block h-0.5 w-3.5 rounded-full" style={{ background: "#6cc6e0" }} /> {t("legend.rivers")}
         </div>
         <div className="flex items-center gap-2.5 text-text-secondary">
-          <span className="inline-block h-2.5 w-3.5 rounded-[3px]" style={{ background: "rgba(220,235,250,0.7)" }} /> {t("legend.glaciers")}
+          <span className="inline-block h-2.5 w-3.5 rounded-[3px]" style={{ background: "rgba(219,234,254,0.7)" }} /> {t("legend.glaciers")}
         </div>
         <div className="flex items-center gap-2.5 text-text-secondary">
           <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#e0b878" }} /> {t("legend.hydropower")}

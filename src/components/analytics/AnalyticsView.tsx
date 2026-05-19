@@ -11,7 +11,7 @@ import { Drop, Mountains, WarningCircle, Lightning, TrendUp, TrendDown } from "@
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const tooltipStyle = {
-  contentStyle: { background: "rgba(17,29,51,0.95)", border: "1px solid #2a3f5e", borderRadius: 10, fontSize: 12, boxShadow: "0 12px 28px -10px rgba(0,0,0,0.5)" },
+  contentStyle: { background: "rgba(255,255,255,0.95)", border: "1px solid #2a3f5e", borderRadius: 10, fontSize: 12, boxShadow: "0 12px 28px -10px rgba(0,0,0,0.5)" },
   labelStyle: { color: "#93a4be", fontFamily: "JetBrains Mono" },
   itemStyle: { color: "#e8eef9" },
 } as const;
@@ -127,7 +127,7 @@ export default function AnalyticsView() {
                 <CartesianGrid stroke="#1d2e49" vertical={false} />
                 <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} unit="%" />
-                <Tooltip {...tooltipStyle} cursor={{ fill: "rgba(108,198,224,0.04)" }} />
+                <Tooltip {...tooltipStyle} cursor={{ fill: "rgba(79,125,243,0.04)" }} />
                 <Bar dataKey="val" radius={[8, 8, 0, 0]}>
                   {regional.map((d) => <Cell key={d.id} fill={d.color} fillOpacity={0.85} />)}
                 </Bar>
@@ -199,7 +199,7 @@ export default function AnalyticsView() {
                 <CartesianGrid stroke="#1d2e49" vertical={false} />
                 <XAxis dataKey="y" tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11, fill: "#93a4be" }} axisLine={false} tickLine={false} unit="%" />
-                <Tooltip {...tooltipStyle} cursor={{ fill: "rgba(108,198,224,0.04)" }} />
+                <Tooltip {...tooltipStyle} cursor={{ fill: "rgba(79,125,243,0.04)" }} />
                 <ReferenceLine y={0} stroke="#2a3f5e" />
                 <Bar dataKey="v" radius={[4, 4, 4, 4]}>
                   {precipData.map((d, i) => <Cell key={i} fill={d.v >= 0 ? "#6dd0b4" : "#d76d80"} fillOpacity={0.85} />)}
