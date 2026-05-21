@@ -1,12 +1,12 @@
 {
   "nav": {
     "brand": "AquaSat TJ",
-    "tagline": "Water Intelligence · Tajikistan",
+    "tagline": "Water & Climate Monitoring · Tajikistan",
     "tabs": { "map": "Map", "analytics": "Analytics", "education": "Learn" },
-    "status": { "live": "LIVE", "dataSource": "WHO · UNICEF · World Bank · NASA" }
+    "status": { "live": "Data updated Nov 2024", "dataSource": "Sources: WHO/UNICEF JMP · NASA GLIMS · World Bank GFDRR" }
   },
   "layers": {
-    "title": "Map Layers",
+    "title": "Data layers",
     "rivers": "Rivers & Streams",
     "glaciers": "Glaciers",
     "waterAccess": "Clean Water Access",
@@ -106,17 +106,17 @@
     }
   },
   "ai": {
-    "title": "AquaAI Assistant",
-    "modelLabel": "Powered by Lovable AI",
-    "placeholder": "Ask about water, glaciers, climate risks...",
+    "title": "Environmental assistant",
+    "modelLabel": "Context-aware · Tajikistan dataset",
+    "placeholder": "Ask about a region, river or indicator…",
     "send": "Send",
-    "welcome": "Welcome to AquaSat TJ. I can explain water access issues, glacier dynamics, climate risks, and regional environmental data across Tajikistan. Click any region on the map or ask me anything.",
+    "welcome": "I help interpret the data on this map — water access, river discharge, glacier change, hydropower and climate risk across Tajikistan's five regions. Pick a question below or ask your own.",
     "suggestedPrompts": [
-      "Why are Tajikistan's glaciers retreating?",
-      "Explain the Nurek and Rogun dams",
-      "What's causing water scarcity in GBAO?",
-      "What are the main flood risks in Khatlon?",
-      "How does glacier melt affect downstream countries?"
+      "Summarize water access across the five regions",
+      "Why is GBAO's water coverage so low?",
+      "How will Rogun HPP change the Vakhsh basin?",
+      "What does glacier retreat mean for Khatlon farmers?",
+      "Which districts face the highest GLOF risk?"
     ],
     "errorFallback": "AquaAI is temporarily offline. Please try again in a moment.",
     "rateLimit": "Too many requests. Please wait a moment.",
@@ -137,8 +137,8 @@
     "sanitation": "Sanitation",
     "rainfall": "Rainfall",
     "infrastructure": "Infrastructure score",
-    "askAI": "Ask AquaAI about this region",
-    "selectPrompt": "Click any region on the map to view detailed environmental data."
+    "askAI": "Ask the assistant about this region",
+    "selectPrompt": "Select a region on the map to view water access, climate risk and infrastructure indicators."
   },
   "mapControls": {
     "zoomIn": "Zoom in",
@@ -146,8 +146,6 @@
     "resetView": "Reset view",
     "satellite": "Satellite",
     "terrain": "Terrain",
-    "dark": "Light",
-    "missingToken": "Add VITE_MAPBOX_TOKEN as a build secret to enable the interactive map.",
-    "missingTokenHint": "Workspace Settings → Build Secrets → VITE_MAPBOX_TOKEN"
+    "dark": "Light"
   }
 }

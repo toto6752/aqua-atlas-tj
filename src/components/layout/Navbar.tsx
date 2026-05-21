@@ -73,12 +73,9 @@ export function Navbar() {
       </div>
 
       <div className="flex items-center gap-2.5">
-        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-border-subtle bg-panel-mid/40">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-success-green opacity-70 animate-pulse-dot" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-success-green" />
-          </span>
-          <span className="text-[10px] font-mono tracking-wider text-text-secondary">{t("nav.status.live")}</span>
+        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-border-subtle bg-white/70">
+          <span className="h-1.5 w-1.5 rounded-full bg-success-green" />
+          <span className="text-[10.5px] text-text-secondary">{t("nav.status.live")}</span>
         </div>
         <div className="flex rounded-full p-0.5 bg-panel-mid/40 border border-border-subtle/70">
           {(["en", "ru"] as const).map((l) => (

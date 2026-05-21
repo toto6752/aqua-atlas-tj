@@ -53,20 +53,17 @@ export function AIAssistant() {
     <aside className="w-[320px] shrink-0 border-l border-border-subtle flex flex-col bg-white/70 backdrop-blur-xl">
       <div className="p-4 border-b border-border-subtle flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="relative w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: "linear-gradient(135deg, rgba(79,125,243,0.18), rgba(16,185,129,0.10))",
-                     border: "1px solid rgba(79,125,243,0.30)",
-                     boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}>
-            <Sparkle size={15} weight="duotone" className="text-cyan-400" />
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-primary/8 border border-primary/20">
+            <Sparkle size={15} weight="duotone" className="text-primary" />
           </div>
           <div>
             <div className="text-[13px] font-semibold text-text-primary leading-tight tracking-tight">{t("ai.title")}</div>
             <div className="text-[10.5px] text-text-muted mt-0.5">{t("ai.modelLabel")}</div>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-panel-mid/50 border border-border-subtle/70">
-          <span className="w-1.5 h-1.5 rounded-full bg-success-green animate-pulse-dot" />
-          <span className="text-[9px] font-mono text-text-secondary tracking-wider">READY</span>
+        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-success-green/8 border border-success-green/25">
+          <span className="w-1.5 h-1.5 rounded-full bg-success-green" />
+          <span className="text-[10px] text-success-green">online</span>
         </div>
       </div>
 

@@ -95,9 +95,12 @@ export default function AnalyticsView() {
     <motion.div variants={staggerContainer} initial="initial" animate="animate"
       className="h-full overflow-y-auto scroll-thin p-8 space-y-6 max-w-[1600px] mx-auto">
       <motion.div variants={fadeInUp}>
-        <div className="text-[11px] font-mono tracking-[0.18em] text-cyan-400/80 uppercase mb-1">Insights</div>
+        <div className="flex items-center gap-2 text-[11px] text-text-muted mb-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-success-green" />
+          <span>Data updated November 2024</span>
+        </div>
         <h1 className="text-[28px] font-semibold text-text-primary tracking-tight">{t("analytics.title")}</h1>
-        <p className="text-[14px] text-text-secondary mt-1">{t("analytics.subtitle")}</p>
+        <p className="text-[14px] text-text-secondary mt-1 max-w-2xl">{t("analytics.subtitle")} — compiled from WHO/UNICEF JMP, NASA GLIMS, World Bank GFDRR and Ministry of Energy of Tajikistan public datasets.</p>
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
