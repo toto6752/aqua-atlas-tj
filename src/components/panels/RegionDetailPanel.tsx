@@ -88,15 +88,13 @@ export function RegionDetailPanel({ regionId }: { regionId: string }) {
       </div>
 
       <button onClick={askAi}
-        className="group w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-[12.5px] font-medium transition-all"
-        style={{ background: "linear-gradient(180deg, rgba(79,125,243,0.14), rgba(79,125,243,0.06))",
-                 border: "1px solid rgba(79,125,243,0.32)",
-                 color: "#a8dceb",
-                 boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}>
+        className="group w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-[12.5px] font-medium transition-all bg-primary/8 hover:bg-primary/14 border border-primary/25 text-primary">
         <Sparkle size={14} weight="duotone" /> {t("regionDetail.askAI")}
       </button>
 
-      <div className="text-[10px] text-text-muted font-mono">WHO/UNICEF JMP · NASA GLIMS · World Bank GFDRR</div>
+      <div className="text-[10px] text-text-muted leading-relaxed pt-1 border-t border-border-subtle/70">
+        Sources: WHO/UNICEF JMP 2023 (water & sanitation), NASA GLIMS 2023 (glacier area), World Bank GFDRR 2023 (flood risk). Updated Nov 2024.
+      </div>
     </motion.div>
   );
 }
