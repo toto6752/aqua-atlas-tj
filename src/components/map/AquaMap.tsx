@@ -85,7 +85,7 @@ export function AquaMap() {
   const { t } = useTranslation();
   const ref = useRef<MapRef>(null);
   const { activeLayers, setSelectedRegion, selectedRegion, mapStyle, setMapStyle } = useAppStore();
-  const [hover, setHover] = useState<{ x: number; y: number; name: string; access: number } | null>(null);
+  const [hover, setHover] = useState<{ x: number; y: number; id: string; name: string; access: number } | null>(null);
 
   useEffect(() => {
     if (!ref.current || !selectedRegion) return;
@@ -105,6 +105,7 @@ export function AquaMap() {
     if (f?.properties) {
       setHover({
         x: e.point.x, y: e.point.y,
+        id: f.properties.id as string,
         name: f.properties.name as string,
         access: f.properties.waterAccess as number,
       });
@@ -248,22 +249,40 @@ export function AquaMap() {
         )}
       </Map>
 
-      {hover && (
-        <div
-          className="pointer-events-none absolute z-20 bg-white border border-border-subtle rounded-xl px-3.5 py-2.5 text-[12px] text-text-primary shadow-[var(--shadow-elevated)]"
-          style={{ left: hover.x + 14, top: hover.y + 14 }}
-        >
-          <div className="font-medium tracking-tight">{hover.name}</div>
-          <div className="font-mono text-primary text-[11px] mt-0.5">{hover.access}% water access</div>
-        </div>
-      )}
+      {hover && (() => {
+        const pop = REGION_POP[hover.id as RegionId];
+        const tone = hover.access >= 80 ? "#10B981" : hover.access >= 60 ? "#F59E0B" : "#EF4444";
+        const label = hover.access >= 80 ? "High access" : hover.access >= 60 ? "Moderate" : "Low access";
+        return (
+          <div
+            className="pointer-events-none absolute z-20 bg-white border border-border-subtle rounded-lg px-3 py-2.5 text-[12px] text-text-primary shadow-[var(--shadow-soft)] min-w-[180px]"
+            style={{ left: hover.x + 14, top: hover.y + 14 }}
+          >
+            <div className="font-medium tracking-tight text-[12.5px]">{hover.name}</div>
+            <div className="mt-1.5 flex items-baseline justify-between gap-3">
+              <span className="text-[10.5px] text-text-muted">Clean water access</span>
+              <span className="data-num text-[13px] font-medium" style={{ color: tone }}>{hover.access}%</span>
+            </div>
+            {pop ? (
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="text-[10.5px] text-text-muted">Population</span>
+                <span className="data-num text-[11.5px] text-text-secondary">{pop.toLocaleString()}</span>
+              </div>
+            ) : null}
+            <div className="mt-1.5 pt-1.5 border-t border-border-subtle/70 flex items-center justify-between">
+              <span className="text-[10px]" style={{ color: tone }}>● {label}</span>
+              <span className="text-[9.5px] text-text-muted">Click for details</span>
+            </div>
+          </div>
+        );
+      })()}
 
-      <div className="absolute top-5 left-5 z-10 flex rounded-2xl p-1 bg-white/90 backdrop-blur border border-border-subtle shadow-[var(--shadow-soft)]">
+      <div className="absolute top-5 left-5 z-10 flex rounded-xl p-1 bg-white/95 backdrop-blur border border-border-subtle shadow-[var(--shadow-soft)]">
         {(["dark", "satellite", "terrain"] as const).map((s) => (
           <button key={s} onClick={() => setMapStyle(s)}
-            className={`px-3.5 py-1.5 text-[11px] font-mono tracking-wide rounded-xl transition-all ${
+            className={`px-3.5 py-1.5 text-[11.5px] rounded-lg transition-all ${
               mapStyle === s
-                ? "bg-primary/10 text-primary shadow-[inset_0_0_0_1px_rgba(79,125,243,0.30)]"
+                ? "bg-primary/10 text-primary"
                 : "text-text-secondary hover:text-text-primary"
             }`}>
             {t(`mapControls.${s}`)}
