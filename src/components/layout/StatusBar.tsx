@@ -23,7 +23,7 @@ export function StatusBar() {
           </div>
         ))}
       </div>
-      <div className="hidden md:flex items-center gap-2 text-text-muted font-mono text-[10px]">
+      <div className="hidden md:flex items-center gap-2 text-text-muted text-[10.5px]">
         <span className="w-1 h-1 rounded-full bg-text-muted/60" />
         {t("nav.status.dataSource")}
       </div>

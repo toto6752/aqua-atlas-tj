@@ -8,8 +8,8 @@ export function MapLegend() {
     { color: "#d76d80", label: t("legend.lowAccess") },
   ];
   return (
-    <div className="absolute bottom-5 left-5 glass border border-border-subtle rounded-2xl p-3.5 text-[11px] z-10 min-w-[210px] shadow-[var(--shadow-elevated)]">
-      <div className="font-mono tracking-wider text-[10px] text-text-secondary mb-2.5">{t("legend.title")}</div>
+    <div className="absolute bottom-5 left-5 bg-white/95 border border-border-subtle rounded-xl p-3.5 text-[11px] z-10 min-w-[230px] shadow-[var(--shadow-soft)]">
+      <div className="text-[10.5px] font-medium text-text-secondary mb-2.5 uppercase tracking-wide">{t("legend.title")}</div>
       <div className="space-y-1.5">
         {items.map((i) => (
           <div key={i.label} className="flex items-center gap-2.5 text-text-primary">
@@ -27,6 +27,9 @@ export function MapLegend() {
         <div className="flex items-center gap-2.5 text-text-secondary">
           <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#e0b878" }} /> {t("legend.hydropower")}
         </div>
+      </div>
+      <div className="mt-3 pt-2 border-t border-border-subtle/70 text-[10px] text-text-muted leading-snug">
+        Source: WHO/UNICEF JMP 2023, NASA GLIMS, World Bank GFDRR. Boundaries are indicative.
       </div>
     </div>
   );
